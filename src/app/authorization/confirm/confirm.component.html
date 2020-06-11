@@ -1,0 +1,13 @@
+<FlexboxLayout flexDirection="column" justifyContent="center" class="auth-wrapper">
+    <TextField
+        [formControl]="confirmCode"
+        width="92%"
+        class="auth-text-field"
+        hint="Код подтверждения"
+        maxLength="13"
+        borderBottomColor="transparent"
+        keyboardType="number"
+    >
+    </TextField>
+    <Button (tap)="confirm()" text="Confirm" class="auth-button_main" isEnabled="{{ confirmCode.valid }}"></Button>
+</FlexboxLayout>

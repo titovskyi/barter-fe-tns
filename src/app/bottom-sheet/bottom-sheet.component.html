@@ -1,0 +1,33 @@
+<ListView
+        [items]="options"
+        (itemTap)="onTap($event)"
+        separatorColor="white"
+        class="list-group"
+>
+    <ng-template let-option="item" let-i="index">
+        <FlexboxLayout alignItems="center" justifyContent="center">
+            <AbsoluteLayout>
+                <Label class="option__icon-bg"></Label>
+                <Label
+                        top="2.5"
+                        left="3.5"
+                        text="&#xf083;"
+                        class="fas option__icon"
+                        *ngIf="i === 0"
+                ></Label>
+                <Label
+                        top="2.5"
+                        left="3.5"
+                        text="&#xf302;"
+                        class="fas option__icon"
+                        *ngIf="i === 1"
+                ></Label>
+            </AbsoluteLayout>
+
+            <Label
+                class="option__text"
+                [text]="option"
+            ></Label>
+        </FlexboxLayout>
+    </ng-template>
+</ListView>

@@ -1,0 +1,78 @@
+<GridLayout rows="auto, *, 50">
+    <ScrollView row="1" [visibility]="isSelected === 'home' ? 'visible' : 'collapse'">
+        <ns-home></ns-home>
+    </ScrollView>
+
+    <ScrollView row="1" [visibility]="isSelected === 'search' ? 'visible' : 'collapse'">
+        <ns-search></ns-search>
+    </ScrollView>
+
+    <ScrollView row="1" [visibility]="isSelected === 'chat' ? 'visible' : 'collapse'">
+        <ns-chat></ns-chat>
+    </ScrollView>
+
+    <ScrollView row="1" [visibility]="isSelected === 'profile' ? 'visible' : 'collapse'">
+        <ns-user-profile></ns-user-profile>
+    </ScrollView>
+
+    <GridLayout row="2" columns="*,*,*,*,*" class="bottom-nav">
+        <Label
+                col="0"
+                text="&#xf015;"
+                class="fas nav-icon"
+                style="font-size: 24;"
+                (tap)="onBottomSheetTap('home')"
+                [ngClass]="{
+                tabselected: isSelected == 'home' ? true : false,
+                tabnotselected: isSelected != 'home' ? true : false
+            }"
+        ></Label>
+        <Label
+                col="1"
+                text="&#xf002;"
+                class="fas nav-icon"
+                style="font-size: 24;"
+                (tap)="onBottomSheetTap('search')"
+                [ngClass]="{
+                tabselected: isSelected == 'search' ? true : false,
+                tabnotselected: isSelected != 'search' ? true : false
+            }"
+        ></Label>
+        <Label
+                col="2"
+                text="&#xf067;"
+                class="fas nav-icon"
+                style="font-size: 24;"
+                (tap)="onCreatePost()"
+                [ngClass]="{
+                tabselected: isSelected == 'add-post' ? true : false,
+                tabnotselected: isSelected != 'add-post' ? true : false
+            }"
+        ></Label>
+        <AbsoluteLayout
+                col="3"
+                textAlignment="center"
+                verticalAlignment="center"
+                (tap)="onBottomSheetTap('chat')"
+                [ngClass]="{
+                tabselected: isSelected == 'chat' ? true : false,
+                tabnotselected: isSelected != 'chat' ? true : false
+            }"
+        >
+            <Label text="&#xf27a;" class="far nav-icon" style="font-size: 24;"></Label>
+            <Label class="connection-badge"></Label>
+            <Label class="chat-badge"></Label>
+        </AbsoluteLayout>
+        <Label
+                col="4"
+                text="&#xf007;"
+                class="fas nav-icon"
+                style="font-size: 24;"
+                (tap)="onBottomSheetTap('profile')"
+                [ngClass]="{
+                tabselected: isSelected == 'profile' ? true : false,
+                tabnotselected: isSelected != 'profile' ? true : false
+            }"
+        ></Label>
+    </GridLayout>
+</GridLayout>

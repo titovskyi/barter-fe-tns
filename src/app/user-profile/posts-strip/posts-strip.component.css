@@ -1,0 +1,12 @@
+.strip-wrapper__item {
+}
+
+.user-strip-post-name {
+    font-size: 16;
+    font-weight: bold;
+}
+
+.user-strip-photo {
+    width: 100%;
+    /*height: 300;*/
+}

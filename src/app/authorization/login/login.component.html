@@ -1,0 +1,16 @@
+<FlexboxLayout flexDirection="column" justifyContent="center" class="auth-wrapper">
+    <AbsoluteLayout>
+        <Label left="25" top="8" text="&#xf3cd;" class="fas auth-input-icon"></Label>
+        <TextField
+            [formControl]="phoneInput"
+            width="92%"
+            class="auth-text-field"
+            hint="Ваш телефон"
+            maxLength="13"
+            borderBottomColor="transparent"
+            keyboardType="number"
+        >
+        </TextField>
+    </AbsoluteLayout>
+    <Button (tap)="login()" text="Log in" class="auth-button_main" isEnabled="{{ phoneInput.valid }}"></Button>
+</FlexboxLayout>

@@ -1,0 +1,21 @@
+/* Add mobile styles for the component here.  */
+.auth-wrapper {
+    background-color: #424855;
+}
+
+.auth-button_main {
+    height: 140px;
+    font-size: 40px;
+    color: #ffffff;
+    background: #20232c;
+    border-radius: 100%;
+}
+
+.auth-text-field {
+    background-color: #969696;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    color: #ffffff;
+    placeholder-color: #6d717c;
+}

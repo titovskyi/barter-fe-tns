@@ -1,0 +1,44 @@
+.tabselected {
+    color: #ff4b60;
+}
+
+.tabnotselected {
+    color: black;
+}
+
+
+
+
+
+
+.connection-badge {
+    border-radius: 100%;
+    color: #ffffff;
+    background: #ff0000;
+    width: 10;
+    height: 10;
+    top: 4;
+    left: 15;
+}
+
+.chat-badge {
+    font-size: 5;
+    border-radius: 100%;
+    color: #ffffff;
+    background: #008000;
+    width: 10;
+    height: 10;
+    top: 4;
+    left: 39;
+}
+
+.bottom-nav {
+    background-color: #eeeeee;
+}
+
+.nav-icon {
+    width: 60;
+    height: 40;
+    padding-left: 20;
+    padding-top: 7;
+}

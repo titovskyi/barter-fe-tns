@@ -1,0 +1,9 @@
+<StackLayout *ngIf="user" class="strip-wrapper"  height="100%">
+    <StackLayout class="strip-wrapper__item">
+        <WrapLayout *ngFor="let post of user.posts">
+<!--            <Image class="user-strip-photo" [src]="post.photo"></Image>-->
+            <FrescoDrawee class="user-strip-photo" aspectRatio="1" verticalAlignment="top" [imageUri]="post.photo"></FrescoDrawee>
+            <Label class="user-strip-post-name" [text]="post.name"></Label>
+        </WrapLayout>
+    </StackLayout>
+</StackLayout>

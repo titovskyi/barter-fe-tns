@@ -1,0 +1,13 @@
+<StackLayout *ngIf="posts" heigh="100%">
+    <FlexboxLayout class="image-wrapper">
+        <!--        <Image class="post-image" [src]="post.photo" stretch="aspectFill" (tap)="onPostTap(post)"></Image>-->
+        <FrescoDrawee
+            *ngFor="let post of posts"
+            class="post-image"
+            [imageUri]="post.photo"
+            aspectRatio="1"
+            verticalAlignment="top"
+            (tap)="onPostTap(post)"
+        ></FrescoDrawee>
+    </FlexboxLayout>
+</StackLayout>

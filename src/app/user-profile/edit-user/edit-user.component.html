@@ -1,0 +1,30 @@
+<StackLayout class="wrapper" orientation="vertical" *ngIf="user">
+    <FlexboxLayout class="profile__action">
+        <Label text="&#xf00d;" class="fas profile__action-icon" (tap)="onCloseTap()"></Label>
+        <Label text="Редактирование профиля"></Label>
+        <Label text="&#xf00c;" class="fas profile__action-icon" (tap)="onConfirmTap()"></Label>
+    </FlexboxLayout>
+    <ScrollView height="100%" >
+        <WrapLayout orientation="vertical" [formGroup]="profileForm">
+            <FlexboxLayout class="avatar-wrapper">
+                <AbsoluteLayout>
+                    <Label *ngIf="!user.avatar" top="0" left="0" class="empty-avatar__bg"></Label>
+                    <Label *ngIf="!user.avatar" top="20" left="27" text="&#xf007;" class="fas empty-avatar__img"></Label>
+                </AbsoluteLayout>
+                <FrescoDrawee
+                        *ngIf="!cameraImage && user.avatar"
+                        class="avatar"
+                        roundAsCircle="true"
+                        [imageUri]="user.avatar"
+                ></FrescoDrawee>
+                <Image *ngIf="cameraImage" class="avatar" [src]="cameraImage" stretch="aspectFill" margin="10"></Image>
+                <Label text="Сменить фото профиля" class="avatar__button" (tap)="openBottomSheet()"></Label>
+            </FlexboxLayout>
+            <TextField class="profile__input" [formControl]="name" hint="Имя" borderBottomColor="blue"></TextField>
+            <TextField class="profile__input" [formControl]="country"  hint="Страна" borderBottomColor="blue"></TextField>
+            <TextField class="profile__input" [formControl]="city" hint="Город" borderBottomColor="blue"></TextField>
+            <TextField class="profile__input" [formControl]="email" hint="Email" borderBottomColor="blue"></TextField>
+            <TextField class="profile__input" [formControl]="about" hint="О себе" borderBottomColor="blue"></TextField>
+        </WrapLayout>
+    </ScrollView>
+</StackLayout>

@@ -1,0 +1,39 @@
+.strip-wrapper__item {
+    width: 100%;
+    padding-top: 25;
+}
+
+.empty-avatar__bg {
+    width: 50;
+    height: 50;
+    border-radius: 100%;
+    background-color: #e4e6e7;
+}
+
+.empty-avatar__img {
+    color: #ffffff;
+    font-size: 25;
+    text-align: center;
+    vertical-align: center;
+    z-index: 2;
+}
+
+.avatar {
+    width: 50;
+    height: 50;
+    border-radius: 100%;
+}
+
+.strip-post-name {
+    margin: 0 10;
+}
+
+.strip-user-name,
+.strip-post-name {
+    font-weight: bold;
+    font-size: 16;
+}
+
+.strip-photo {
+    width: 100%;
+}

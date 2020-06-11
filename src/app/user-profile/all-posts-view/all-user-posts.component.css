@@ -1,0 +1,8 @@
+.image-wrapper {
+    flex-wrap: wrap;
+}
+
+.post-image {
+    width: 25%;
+
+}

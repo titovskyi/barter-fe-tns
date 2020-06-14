@@ -8,11 +8,12 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import { UserService } from '~/app/user/user.service';
 import { User } from '~/app/user/user.model';
 import { BottomSheetOptions, BottomSheetService } from 'nativescript-material-bottomsheet/angular';
-import { BottomSheetComponent } from '~/app/bottom-sheet/bottom-sheet.component';
+import { BottomSheetComponent } from '~/app/shared/bottom-sheet/bottom-sheet.component';
 import { requestPermissions, takePicture } from 'nativescript-camera';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { ImageSource } from 'tns-core-modules/image-source';
+import { RequestOptionsInterface } from '../user/request-options.interface';
 
 var bghttpModule = require('nativescript-background-http');
 var session = bghttpModule.session('image-upload');
@@ -26,6 +27,8 @@ export class EditUserComponent implements OnInit {
     public user: User;
 
     public cameraImage: ImageAsset;
+
+    public prevAvatar: string = null;
 
     // #############################################
 
@@ -79,33 +82,15 @@ export class EditUserComponent implements OnInit {
     }
 
     public onConfirmTap() {
-        // const formData = new FormData();
-        //
-        // formData.append('name', this.name.value);
-        // formData.append('country', this.country.value);
-        // formData.append('city', this.city.value);
-        // formData.append('email', this.email.value);
-        // formData.append('about', this.about.value);
-        // console.log(this.cameraImage);
-        // formData.append('avatar', this.cameraImage[0]);
-        // console.log(this.cameraImage.android);
-
-        const values = {
+        const values: RequestOptionsInterface = {
             name: this.name.value,
-            avatar: this.user.avatar
-        }
+            avatar: this.user.avatar,
+            prevAvatar: this.prevAvatar
+        };
 
         this.userService.update(values).subscribe((res) => {
             this.routerExtensions.back();
         });
-
-        // const params = [
-        //     { name: 'name', value: this.name.value },
-        //     { name: 'country', value: this.country.value },
-        //     { name: 'city', value: this.city.value },
-        //     { name: 'email', value: this.email.value },
-        //     { name: 'about', value: this.about.value }
-        // ];
     }
 
     public openBottomSheet() {
@@ -147,6 +132,8 @@ export class EditUserComponent implements OnInit {
                     .fromAsset(this.cameraImage)
                     .then((imageSource) => {
                         const imageBase64 = imageSource.toBase64String('jpg', 60);
+
+                        this.prevAvatar = this.user.avatar;
                         this.user.avatar = `data:image/jpeg;base64,${imageBase64}`;
                     })
                     .catch((err) => console.log(err));
@@ -162,6 +149,8 @@ export class EditUserComponent implements OnInit {
                     .fromAsset(this.cameraImage)
                     .then((imageSource) => {
                         const imageBase64 = imageSource.toBase64String('jpg', 60);
+
+                        this.prevAvatar = this.user.avatar;
                         this.user.avatar = `data:image/jpeg;base64,${imageBase64}`;
                     })
                     .catch((err) => console.log(err));

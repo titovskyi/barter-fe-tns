@@ -6,7 +6,7 @@ import { LoginComponent } from '~/app/authorization/login/login.component';
 import { AuthGuardService } from '~/app/authorization/auth-guard.service';
 import { ConfirmComponent } from '~/app/authorization/confirm/confirm.component';
 import { MainWrapperComponent } from '~/app/main-wrapper/main-wrapper.component';
-import {EditUserComponent} from "~/app/user-profile/edit-user/edit-user.component";
+import {EditUserComponent} from "~/app/edit-user/edit-user.component";
 
 const routes: Routes = [
     { path: '', redirectTo: '/main', pathMatch: 'full' },

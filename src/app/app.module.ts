@@ -11,22 +11,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SingUpComponent } from './authorization/sing-up/sing-up.component';
 import { LoginComponent } from './authorization/login/login.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmComponent } from './authorization/confirm/confirm.component';
 import { JwtInterceptor } from '~/app/helpers/jwt.interceptor';
-import { AddPostComponent } from './add-post/add-post.component';
-import { SearchComponent } from './search/search.component';
-import { HomeComponent } from './home/home.component';
-import { ChatComponent } from './chat/chat.component';
+import { AddPostComponent } from './modals/add-post/add-post.component';
+import { SearchComponent } from './main-wrapper/search/search.component';
+import { HomeComponent } from './main-wrapper/home/home.component';
+import { ChatComponent } from './main-wrapper/chat/chat.component';
 import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
-import { AllUserPostsComponent } from './user-profile/all-posts-view/all-user-posts.component';
-import { PostsStripComponent } from './user-profile/posts-strip/posts-strip.component';
-import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { UserProfileComponent } from './main-wrapper/user-profile/user-profile.component';
+import { AllUserPostsComponent } from './main-wrapper/user-profile/all-posts-view/all-user-posts.component';
+import { PostsStripComponent } from './main-wrapper/user-profile/posts-strip/posts-strip.component';
+
+import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.component';
 
 import { TNSFrescoModule } from "nativescript-fresco/angular";
 import * as frescoModule from "nativescript-fresco";
 import * as applicationModule from "tns-core-modules/application";
-import { EditUserComponent } from './user-profile/edit-user/edit-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { DetailedPostComponent } from './modals/detailed-post/detailed-post.component';
 
 if (applicationModule.android) {
     applicationModule.on("launch", () => {
@@ -60,7 +62,8 @@ if (applicationModule.android) {
         AllUserPostsComponent,
         PostsStripComponent,
         BottomSheetComponent,
-        EditUserComponent
+        EditUserComponent,
+        DetailedPostComponent
     ],
     providers: [
         {

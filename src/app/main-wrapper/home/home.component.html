@@ -3,16 +3,16 @@
         <WrapLayout *ngFor="let post of stripPosts">
             <FlexboxLayout alignItems="center">
                 <AbsoluteLayout class="avatar__wrapper">
-                    <Label *ngIf="!post.user.avatar" class="empty-avatar__bg"></Label>
-                    <Label *ngIf="!post.user.avatar" top="10" left="15" text="&#xf007;" class="fas empty-avatar__img"></Label>
+                    <Label *ngIf="post.user && !post.user.avatar" class="empty-avatar__bg"></Label>
+                    <Label *ngIf="post.user && !post.user.avatar" top="10" left="15" text="&#xf007;" class="fas empty-avatar__img"></Label>
 <!--                    <Image *ngIf="post.user.avatar" class="avatar" [src]="post.user.avatar" stretch="aspectFill" margin="10"></Image>-->
-                    <FrescoDrawee *ngIf="post.user.avatar" class="avatar" aspectRatio="1" verticalAlignment="top" roundAsCircle="true" [imageUri]="post.user.avatar" stretch="aspectFill"  margin="10"></FrescoDrawee>
+                    <FrescoDrawee *ngIf="post.user && post.user.avatar" class="avatar" aspectRatio="1" verticalAlignment="top" roundAsCircle="true" [imageUri]="post.user.avatar" stretch="aspectFill"  margin="10"></FrescoDrawee>
                 </AbsoluteLayout>
                 <Label class="strip-user-name" [text]="post.user.name"></Label>
             </FlexboxLayout>
 <!--            <Image class="strip-photo" [src]="post.photo"></Image>-->
-            <FrescoDrawee class="strip-photo" aspectRatio="1" verticalAlignment="top" [imageUri]="post.photo"></FrescoDrawee>
-            <Label class="strip-post-name" [text]="post.name"></Label>
+            <FrescoDrawee class="strip-photo" aspectRatio="0.8" verticalAlignment="top" [imageUri]="post.photo"></FrescoDrawee>
+            <Label class="strip-post-name" [text]="post.title"></Label>
         </WrapLayout>
     </StackLayout>
 <!--</ScrollView>-->

@@ -7,6 +7,8 @@ import { Post } from '~/app/post/post.model';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 
 import * as bghttp from 'nativescript-background-http';
+import { UserFactory } from '~/app/user/user.factory';
+import { RequestOptionsInterface } from '~/app/user/request-options.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -33,12 +35,15 @@ export class UserService {
         phone: null,
         name: null,
         avatar: null,
+        country: null,
+        city: null,
+        about: null,
         posts: []
     });
 
     // #############################################
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private userFactory: UserFactory) {
         this.session = bghttp.session('image-upload');
     }
 
@@ -51,13 +56,13 @@ export class UserService {
     // #############################################
 
     public getByToken(): Observable<void> {
-        return this.http
-            .get<{ id?: string; phone?: number; name?: string; avatar?: string; posts?: Post[] }>(UserService.USER_URL)
-            .pipe(
-                map((response: any) => {
-                    this.updateUserSubject(response);
-                })
-            );
+        return this.http.get<User>(UserService.USER_URL).pipe(
+            map((response: any): void => {
+                const currentUser = this.userFactory.create(response);
+
+                this.$user.next(currentUser);
+            })
+        );
     }
 
     // #############################################
@@ -66,7 +71,7 @@ export class UserService {
         return this.http.post<number>(UserService.LOGIN_URL, { phone });
     }
 
-    public confirmUser(phone: string, confirmCode: string) {
+    public confirmUser(phone: string, confirmCode: string): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(UserService.USER_URL, { phone, confirmCode });
     }
 
@@ -74,77 +79,24 @@ export class UserService {
         return this.http.get<boolean>(UserService.CHECK_TOKEN_URL);
     }
 
-    public update(values: { name?: string, avatar?: string }): Observable<void> {
-        return this.http
-            .put<{ id?: string; phone?: number; name?: string; avatar?: string; posts?: Post[] | null }>(
-                UserService.USER_URL,
-                values
-            )
-            .pipe(
-                map((response) => {
-                    this.updateUserSubject(response);
-                })
-            );
+    public update(values: RequestOptionsInterface): Observable<void> {
+        return this.http.put<User>(UserService.USER_URL, values).pipe(
+            map((response: User): void => {
+                const updatedUser = this.userFactory.create(response);
+
+                this.$user.next(updatedUser);
+            })
+        );
     }
-
-    public uploadAvatar(cameraImage: ImageAsset) {
-
-    }
-
-    // public updateWithAvatar(data: {
-    //     form?: {
-    //         name: string;
-    //         country: string;
-    //         city: string;
-    //         email: string;
-    //         about: string;
-    //     };
-    //     image?: ImageAsset;
-    // }) {
-    //     const HttpUploadOptions = {
-    //         headers: new HttpHeaders({ "Content-Type": "application/octet-stream" })
-    //     }
-    //
-    //     const body = [];
-    //
-    //     if (data.form.name) {
-    //         body.push({ name: 'name', value: data.form.name });
-    //     }
-    //
-    //     if (data.form.country) {
-    //         body.push({ name: 'country', value: data.form.country });
-    //     }
-    //
-    //     if (data.form.city) {
-    //         body.push({ name: 'city', value: data.form.city });
-    //     }
-    //
-    //     if (data.form.email) {
-    //         body.push({ name: 'email', value: data.form.email });
-    //     }
-    //
-    //     if (data.form.about) {
-    //         body.push({ name: 'about', value: data.form.about });
-    //     }
-    //
-    //
-    //
-    //
-    //     // return this.http.put(UserService.USER_URL, data, HttpUploadOptions);
-    // }
 
     // #############################################
 
-    private updateUserSubject(values: {
-        id?: string;
-        phone?: number;
-        name?: string;
-        avatar?: string;
-        posts?: Post[] | null;
-    }) {
-        const user = { ...this.$user.value, ...values };
+    public updateUserPosts(post): void {
+        const user = this.$user.value;
 
-        this.$user.next(new User(user.id, user.phone, user.name, user.avatar, user.posts));
+        user.posts.push(post);
+        console.log(user);
+        this.$user.next(user);
     }
 
     // #############################################

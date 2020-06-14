@@ -1,9 +1,5 @@
 import {
     Component,
-    ContentChildren,
-    OnInit,
-    AfterContentInit,
-    QueryList,
     ChangeDetectorRef,
     ViewContainerRef
 } from '@angular/core';
@@ -13,7 +9,7 @@ import { ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
 
 import { Post } from '~/app/post/post.model';
-import { AddPostComponent } from '~/app/add-post/add-post.component';
+import { AddPostComponent } from '~/app/modals/add-post/add-post.component';
 // import {TabComponent} from "~/app/navigation/tab/tab.component";
 
 @Component({
@@ -37,22 +33,6 @@ export class MainWrapperComponent {
         this.page.androidStatusBarBackground = '#ffffff';
     }
 
-    ngOnInit(): void {}
-
-    ngAfterContentInit(): void {
-        // let activeTabs = this.tabs.filter((tab)=> {
-        //     return tab.active
-        // });
-        //
-        // if(activeTabs.length === 0) {
-        //     this.tabs.forEach((tab, index) => {
-        //         if(index === 2) {
-        //             this.selectTab(tab);
-        //         }
-        //     })
-        // }
-    }
-
     // #############################################
 
     public onBottomSheetTap(isSelected: string): void {
@@ -61,19 +41,19 @@ export class MainWrapperComponent {
     }
 
     public onCreatePost() {
-        const options: ModalDialogOptions = {
-            context: {},
-            viewContainerRef: this.viewContainerRef,
-            fullscreen: true
-        };
-
-        this.modal.showModal(AddPostComponent, options);
-
-        // requestPermissions().then(() => {
-        //     takePicture().then((image) => {
-        //         this.decodeToBase64(image);
-        //     });
-        // });
+        //
+        // const options: ModalDialogOptions = {
+        //     context: {},
+        //     viewContainerRef: this.viewContainerRef,
+        //     fullscreen: true
+        // };
+        //
+        // this.modal.showModal(AddPostComponent, options);
+        requestPermissions().then(() => {
+            takePicture().then((image) => {
+                this.decodeToBase64(image);
+            });
+        });
     }
 
     private decodeToBase64(image) {
@@ -87,7 +67,13 @@ export class MainWrapperComponent {
                 };
                 this.newPostPhoto = imageBase64;
 
-                this.modal.showModal(AddPostComponent, options);
+                this.modal.showModal(AddPostComponent, options).then((res) => {
+                    if(res === 'success') {
+                        this.isSelected = 'profile';
+                    } else {
+                        this.isSelected = 'home';
+                    }
+                });
             })
             .catch((err) => {
                 this.isSelected = 'home';

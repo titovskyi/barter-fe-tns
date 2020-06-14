@@ -1,0 +1,13 @@
+<GridLayout rows="75, *, auto" width="100%">
+    <FlexboxLayout row="0" class="profile__action">
+        <Label text="&#xf00d;" class="fas profile__action-icon" (tap)="onClose()"></Label>
+        <Label text="Редактирование профиля"></Label>
+        <Label text="&#xf00c;" class="fas profile__action-icon" (tap)="onConfirmTap()"></Label>
+    </FlexboxLayout>
+    <WrapLayout  row="1" orientation="vertical">
+        <FrescoDrawee [imageUri]="photo" class="post-preview" aspectRatio="1" verticalAlignment="top" ></FrescoDrawee>
+        <TextField class="profile__input" [formControl]="title" hint="Название" borderBottomColor="blue"></TextField>
+        <TextField class="profile__input" [formControl]="description"  hint="Краткое описание" borderBottomColor="blue"></TextField>
+    </WrapLayout>
+</GridLayout>
+

@@ -8,9 +8,10 @@ import { User } from '~/app/user/user.model';
 import { UserService } from '~/app/user/user.service';
 import { requestPermissions, takePicture } from 'nativescript-camera';
 import { BottomSheetService, BottomSheetOptions } from 'nativescript-material-bottomsheet/angular';
-import { BottomSheetComponent } from '~/app/bottom-sheet/bottom-sheet.component';
+import { BottomSheetComponent } from '~/app/shared/bottom-sheet/bottom-sheet.component';
 import { flatMap } from 'rxjs/operators';
 import {ImageSource} from "tns-core-modules/image-source";
+import {RequestOptionsInterface} from "~/app/user/request-options.interface";
 
 @Component({
     selector: 'ns-user-profile',
@@ -104,7 +105,13 @@ export class UserProfileComponent implements OnInit {
     }
 
     private onTakePicture(): void {
-        requestPermissions().then(() => {
+        let options = {
+            width: '100%',
+            height: '300',
+            keepAspectRatio: true,
+            saveToGallery: false
+        };
+        requestPermissions().then(() => {0
             takePicture().then((image) => {
                 this.cameraImage = image;
 
@@ -118,7 +125,16 @@ export class UserProfileComponent implements OnInit {
             .fromAsset(image)
             .then((imageSource) => {
                 const imageBase64 = imageSource.toBase64String('jpg', 60);
-                this.userService.update({avatar: `data:image/jpeg;base64,${imageBase64}`}).subscribe(() => {})
+                const values: RequestOptionsInterface = {
+                    avatar: `data:image/jpeg;base64,${imageBase64}`,
+                };
+
+                this.userService.update(values).subscribe(() => {
+
+                });
+
+
+                this.userService.update(values).subscribe(() => {})
             })
             .catch((err) => console.log(err));
     }

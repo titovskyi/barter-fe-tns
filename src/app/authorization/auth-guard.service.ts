@@ -23,10 +23,17 @@ export class AuthGuardService implements CanActivate {
 
         if (userAuthToken) {
             return this.userService.checkToken().pipe(
-                map(() => {
-                    return true;
+                map((response) => {
+                    if (response) {
+                        return true;
+                    } else {
+                        this.router.navigate(['login']);
+                        return false;
+                    }
                 }),
-                catchError(() => {
+                catchError((err) => {
+                    this.router.navigate(['login']);
+
                     return of(false);
                 })
             );

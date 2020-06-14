@@ -8,11 +8,11 @@
         <WrapLayout orientation="vertical" [formGroup]="profileForm">
             <FlexboxLayout class="avatar-wrapper">
                 <AbsoluteLayout>
-                    <Label *ngIf="!user.avatar" top="0" left="0" class="empty-avatar__bg"></Label>
-                    <Label *ngIf="!user.avatar" top="20" left="27" text="&#xf007;" class="fas empty-avatar__img"></Label>
+                    <Label *ngIf="user && !user.avatar" top="0" left="0" class="empty-avatar__bg"></Label>
+                    <Label *ngIf="user && !user.avatar" top="20" left="27" text="&#xf007;" class="fas empty-avatar__img"></Label>
                 </AbsoluteLayout>
                 <FrescoDrawee
-                        *ngIf="!cameraImage && user.avatar"
+                        *ngIf="!cameraImage && user && user.avatar"
                         class="avatar"
                         roundAsCircle="true"
                         [imageUri]="user.avatar"

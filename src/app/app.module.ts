@@ -24,14 +24,15 @@ import { PostsStripComponent } from './main-wrapper/user-profile/posts-strip/pos
 
 import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.component';
 
-import { TNSFrescoModule } from "nativescript-fresco/angular";
-import * as frescoModule from "nativescript-fresco";
-import * as applicationModule from "tns-core-modules/application";
+import { TNSFrescoModule } from 'nativescript-fresco/angular';
+import * as frescoModule from 'nativescript-fresco';
+import * as applicationModule from 'tns-core-modules/application';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { DetailedPostComponent } from './modals/detailed-post/detailed-post.component';
+import { PropositionComponent } from './proposition/proposition.component';
 
 if (applicationModule.android) {
-    applicationModule.on("launch", () => {
+    applicationModule.on('launch', () => {
         frescoModule.initialize();
     });
 }
@@ -63,7 +64,8 @@ if (applicationModule.android) {
         PostsStripComponent,
         BottomSheetComponent,
         EditUserComponent,
-        DetailedPostComponent
+        DetailedPostComponent,
+        PropositionComponent
     ],
     providers: [
         {
@@ -72,7 +74,7 @@ if (applicationModule.android) {
             multi: true
         }
     ],
-    entryComponents: [BottomSheetComponent, AddPostComponent ],
+    entryComponents: [BottomSheetComponent, AddPostComponent, DetailedPostComponent],
     schemas: [NO_ERRORS_SCHEMA]
 })
 /*

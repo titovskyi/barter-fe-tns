@@ -1,17 +1,19 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit, ViewContainerRef} from '@angular/core';
-
-import * as imagepicker from 'nativescript-imagepicker';
-import { ImageAsset } from 'tns-core-modules/image-asset';
-
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '~/app/user/user.model';
-import { UserService } from '~/app/user/user.service';
-import { requestPermissions, takePicture } from 'nativescript-camera';
-import { BottomSheetService, BottomSheetOptions } from 'nativescript-material-bottomsheet/angular';
-import { BottomSheetComponent } from '~/app/shared/bottom-sheet/bottom-sheet.component';
 import { flatMap } from 'rxjs/operators';
-import {ImageSource} from "tns-core-modules/image-source";
-import {RequestOptionsInterface} from "~/app/user/request-options.interface";
+
+import { requestPermissions, takePicture } from 'nativescript-camera';
+import * as imagepicker from 'nativescript-imagepicker';
+import { BottomSheetService, BottomSheetOptions } from 'nativescript-material-bottomsheet/angular';
+import { ImageCropper } from 'nativescript-imagecropper';
+
+import { ImageAsset } from 'tns-core-modules/image-asset';
+import { ImageSource, fromResource, fromNativeSource } from 'tns-core-modules/image-source';
+
+import { User } from '~/app/models/user/user.model';
+import { UserService } from '~/app/models/user/user.service';
+import { BottomSheetComponent } from '~/app/shared/bottom-sheet/bottom-sheet.component';
+import { RequestOptionsInterface } from '~/app/models/user/request-options.interface';
 
 @Component({
     selector: 'ns-user-profile',
@@ -24,6 +26,8 @@ export class UserProfileComponent implements OnInit {
     public user: User;
 
     public cameraImage: ImageAsset;
+
+    public croppedImage = null;
 
     public scale: number = 1;
 
@@ -100,19 +104,54 @@ export class UserProfileComponent implements OnInit {
             .then((selection) => {
                 this.cameraImage = selection[0];
 
+                // this.cameraImage.getImageAsync(source => {
+                //     if (source) {
+                //         const imageSource = new Image
+                //         const selectedImgSource = fromNativeSource(source);
+                //         const imageCropper = new ImageCropper();
+                //         imageCropper
+                //             .show(selectedImgSource, { width: 500, height: 500 })
+                //             .then(args => {
+                //                 if (args.image !== null) {
+                //                     // Use args.image
+                //                 }
+                //             })
+                //             .catch(function(e) {
+                //                 console.log(e);
+                //             });
+                //     }
+                // });
+
                 this.decodeToBase64(this.cameraImage);
             });
     }
 
     private onTakePicture(): void {
-        let options = {
-            width: '100%',
-            height: '300',
-            keepAspectRatio: true,
-            saveToGallery: false
-        };
-        requestPermissions().then(() => {0
+        // let options = {
+        //     width: '100%',
+        //     height: '300',
+        //     keepAspectRatio: true,
+        //     saveToGallery: false
+        // };
+        requestPermissions().then(() => {
             takePicture().then((image) => {
+                // ImageSource.fromAsset(image).then((source) => {
+                //     setTimeout(async () => {
+                //         const imageCropper = new ImageCropper();
+                //         imageCropper
+                //             .show(source, { width: 300, height: 300 })
+                //             .then((args) => {
+                //                 if (args.image !== null) {
+                //                     // this.croppedImage.imageSource = args.image;
+                //                     // console.log(this.cropped    Image);
+                //                 }
+                //             })
+                //             .catch(function (e) {
+                //                 console.log(e);
+                //             });
+                //     }, 1000);
+                // });
+
                 this.cameraImage = image;
 
                 this.decodeToBase64(this.cameraImage);
@@ -121,20 +160,14 @@ export class UserProfileComponent implements OnInit {
     }
 
     private decodeToBase64(image) {
-        ImageSource
-            .fromAsset(image)
+        ImageSource.fromAsset(image)
             .then((imageSource) => {
                 const imageBase64 = imageSource.toBase64String('jpg', 60);
                 const values: RequestOptionsInterface = {
-                    avatar: `data:image/jpeg;base64,${imageBase64}`,
+                    avatar: `data:image/jpeg;base64,${imageBase64}`
                 };
 
-                this.userService.update(values).subscribe(() => {
-
-                });
-
-
-                this.userService.update(values).subscribe(() => {})
+                this.userService.update(values).subscribe(() => {});
             })
             .catch((err) => console.log(err));
     }

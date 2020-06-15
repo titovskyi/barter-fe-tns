@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '~/app/user/user.model';
+import { User } from '~/app/models/user/user.model';
 
 @Component({
     selector: 'ns-posts-strip',

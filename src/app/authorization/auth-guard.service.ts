@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 
 import { getString, remove } from 'tns-core-modules/application-settings/application-settings';
 
-import { UserService } from '~/app/user/user.service';
-import { User } from '~/app/user/user.model';
+import { UserService } from '~/app/models/user/user.service';
+import { User } from '~/app/models/user/user.model';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/internal/operators';
 

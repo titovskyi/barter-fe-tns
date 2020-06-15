@@ -4,10 +4,10 @@
         <Label text="Редактирование профиля"></Label>
         <Label text="&#xf00c;" class="fas profile__action-icon" (tap)="onConfirmTap()"></Label>
     </FlexboxLayout>
-    <WrapLayout  row="1" orientation="vertical">
-        <FrescoDrawee [imageUri]="photo" class="post-preview" aspectRatio="1" verticalAlignment="top" ></FrescoDrawee>
-        <TextField class="profile__input" [formControl]="title" hint="Название" borderBottomColor="blue"></TextField>
-        <TextField class="profile__input" [formControl]="description"  hint="Краткое описание" borderBottomColor="blue"></TextField>
-    </WrapLayout>
+    <GridLayout rows="*, 75, 100" columns="*" row="1" orientation="vertical">
+        <FrescoDrawee row="0" [imageUri]="photo" class="post-preview" aspectRatio="1" verticalAlignment="top" ></FrescoDrawee>
+        <TextField row="1" class="profile__input" [formControl]="title" hint="Название" borderBottomColor="blue"></TextField>
+        <TextView row="2" class="profile__input" [formControl]="description"  hint="Краткое описание" borderBottomColor="blue"></TextView>
+    </GridLayout>
 </GridLayout>
 

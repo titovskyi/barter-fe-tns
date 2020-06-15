@@ -1,9 +1,16 @@
-<StackLayout *ngIf="user" class="strip-wrapper"  height="100%">
+<StackLayout *ngIf="user" class="strip-wrapper" height="100%">
     <StackLayout class="strip-wrapper__item">
         <WrapLayout *ngFor="let post of user.posts">
             <Label class="user-strip-post-name" [text]="post.title"></Label>
             <!--            <Image class="user-strip-photo" [src]="post.photo"></Image>-->
-            <FrescoDrawee class="user-strip-photo" stretch="aspectFill" width="100%" height="300"[imageUri]="post.photo"></FrescoDrawee>
+            <FrescoDrawee
+                class="user-strip-photo"
+                stretch="aspectFill"
+                width="100%"
+                height="300"
+                [imageUri]="post.photo"
+                failureImageUri="~/app/assets/fail-image.jpg"
+            ></FrescoDrawee>
         </WrapLayout>
     </StackLayout>
 </StackLayout>

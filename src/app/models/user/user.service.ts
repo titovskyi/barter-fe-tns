@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '~/app/user/user.model';
+import { User } from '~/app/models/user/user.model';
 import { map } from 'rxjs/internal/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Post } from '~/app/post/post.model';
-import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 
 import * as bghttp from 'nativescript-background-http';
-import { UserFactory } from '~/app/user/user.factory';
-import { RequestOptionsInterface } from '~/app/user/request-options.interface';
+import { UserFactory } from '~/app/models/user/user.factory';
+import { RequestOptionsInterface } from '~/app/models/user/request-options.interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    public static readonly DOMAIN = 'http://192.168.0.103:3000';
+    public static readonly DOMAIN = 'http://192.168.43.118:3000';
 
     public static readonly UPLOADS_URL = `${UserService.DOMAIN}/upload`;
 
@@ -91,11 +89,25 @@ export class UserService {
 
     // #############################################
 
-    public updateUserPosts(post): void {
+    public addUserPosts(post): void {
         const user = this.$user.value;
 
         user.posts.push(post);
-        console.log(user);
+
+        this.$user.next({...user});
+    }
+
+    public updateUserPosts(newPost): void {
+        let user = this.$user.value;
+
+        user.posts = user.posts.map((post) => {
+            if (post.id === newPost.id) {
+                return newPost;
+            }
+
+            return post;
+        });
+
         this.$user.next(user);
     }
 

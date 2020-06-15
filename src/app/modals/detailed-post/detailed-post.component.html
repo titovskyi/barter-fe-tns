@@ -1,1 +1,21 @@
-<Button text="detailed-post works!" class="btn btn-primary"></Button>
+<ScrollView>
+   <GridLayout rows="75, *">
+       <FlexboxLayout row="0" class="profile__action">
+           <Label text="&#xf00d;" class="fas profile__action-icon" (tap)="onClose()"></Label>
+           <Label text="Редактирование товара"></Label>
+           <Label text="&#xf00c;" class="fas profile__action-icon" (tap)="onConfirmTap()"></Label>
+       </FlexboxLayout>
+       <GridLayout row="1" rows="*, 75, 75" columns="*">
+           <FrescoDrawee
+                   row="0"
+                   [imageUri]="post.photo"
+                   failureImageUri="~/app/assets/fail-image.jpg"
+                   aspectRatio="1"
+                   verticalAlignment="top"
+           >
+           </FrescoDrawee>
+           <TextField [formControl]="title" class="detailed-input" row="1" [text]="post.title" borderBottomColor="blue"></TextField>
+           <TextView [formControl]="description" class="detailed-input" row="2" [text]="post.description" borderBottomColor="blue"></TextView>
+       </GridLayout>
+   </GridLayout>
+</ScrollView>

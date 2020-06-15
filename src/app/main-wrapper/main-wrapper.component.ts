@@ -8,7 +8,7 @@ import { requestPermissions, takePicture } from 'nativescript-camera';
 import { ImageSource } from 'tns-core-modules/image-source/image-source';
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
 
-import { Post } from '~/app/post/post.model';
+import { Post } from '~/app/models/post/post.model';
 import { AddPostComponent } from '~/app/modals/add-post/add-post.component';
 // import {TabComponent} from "~/app/navigation/tab/tab.component";
 
@@ -18,7 +18,7 @@ import { AddPostComponent } from '~/app/modals/add-post/add-post.component';
     styleUrls: ['./main-wrapper.component.css']
 })
 export class MainWrapperComponent {
-    public isSelected: string = 'profile';
+    public isSelected: string = 'home';
 
     public newPostPhoto: string = null;
 
@@ -41,14 +41,6 @@ export class MainWrapperComponent {
     }
 
     public onCreatePost() {
-        //
-        // const options: ModalDialogOptions = {
-        //     context: {},
-        //     viewContainerRef: this.viewContainerRef,
-        //     fullscreen: true
-        // };
-        //
-        // this.modal.showModal(AddPostComponent, options);
         requestPermissions().then(() => {
             takePicture().then((image) => {
                 this.decodeToBase64(image);
@@ -79,14 +71,6 @@ export class MainWrapperComponent {
                 this.isSelected = 'home';
             });
     }
-
-    // selectTab(currentTab: TabComponent){
-    //     this.tabs.toArray().map(tab => {
-    //         tab.active = currentTab.type === tab.type;
-    //
-    //         return tab;
-    //     });
-    // }
 
     // #############################################
 }

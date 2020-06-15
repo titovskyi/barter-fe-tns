@@ -5,15 +5,15 @@ import { ImageAsset } from 'tns-core-modules/image-asset';
 import * as imagepicker from 'nativescript-imagepicker';
 import { RouterExtensions } from 'nativescript-angular/router';
 
-import { UserService } from '~/app/user/user.service';
-import { User } from '~/app/user/user.model';
+import { UserService } from '~/app/models/user/user.service';
+import { User } from '~/app/models/user/user.model';
 import { BottomSheetOptions, BottomSheetService } from 'nativescript-material-bottomsheet/angular';
 import { BottomSheetComponent } from '~/app/shared/bottom-sheet/bottom-sheet.component';
 import { requestPermissions, takePicture } from 'nativescript-camera';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { ImageSource } from 'tns-core-modules/image-source';
-import { RequestOptionsInterface } from '../user/request-options.interface';
+import { RequestOptionsInterface } from '../models/user/request-options.interface';
 
 var bghttpModule = require('nativescript-background-http');
 var session = bghttpModule.session('image-upload');
@@ -54,8 +54,6 @@ export class EditUserComponent implements OnInit {
         private routerExtensions: RouterExtensions,
     ) {
         this.page.actionBarHidden = true;
-        this.page.statusBarStyle = 'light';
-        this.page.androidStatusBarBackground = '#ffffff';
     }
 
     // #############################################

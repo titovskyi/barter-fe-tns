@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '~/app/user/user.model';
-import { Post } from '~/app/post/post.model';
-import {PostFactory} from "~/app/post/post.factory";
+import { User } from '~/app/models/user/user.model';
+import { Post } from '~/app/models/post/post.model';
+import {PostFactory} from "~/app/models/post/post.factory";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserFactory {
-    private static readonly SERVER_URL = 'http://192.168.0.103:3000/uploads/';
+    private static readonly SERVER_URL = 'http://192.168.43.118:3000/uploads/';
 
     // #############################################
 

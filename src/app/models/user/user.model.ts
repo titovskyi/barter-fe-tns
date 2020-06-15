@@ -1,4 +1,4 @@
-import { Post } from '~/app/post/post.model';
+import { Post } from '~/app/models/post/post.model';
 
 export class User {
     // #############################################

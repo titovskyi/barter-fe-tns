@@ -5,6 +5,7 @@
             *ngFor="let post of posts"
             class="post-image"
             [imageUri]="post.photo"
+            failureImageUri="~/app/assets/fail-image.jpg"
             aspectRatio="1"
             verticalAlignment="top"
             (tap)="onPostTap(post)"

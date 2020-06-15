@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Page } from 'tns-core-modules/ui/page';
 import { FormControl } from '@angular/forms';
-import { UserService } from '~/app/user/user.service';
+import { UserService } from '~/app/models/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({

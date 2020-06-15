@@ -29,11 +29,44 @@
 }
 
 .strip-user-name,
-.strip-post-name {
+.strip-post-title {
     font-weight: bold;
     font-size: 16;
 }
 
+.strip-post-description {
+    font-weight: 400;
+    font-size: 14;
+    width: 100%;
+}
+
 .strip-photo {
     width: 100%;
+    height: 300;
+}
+
+.strip-photo__action-bg {
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 300;
+    background: rgba(0, 0, 0, 0.3);;
+    z-index: 1;
+}
+
+.strip-photo__action-icon {
+    font-size: 50;
+    color: #ffffff;
+    opacity: 1;
+}
+
+.strip-post__info {
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 14;
+}
+
+.strip-post__info_count {
+    margin-left: 5;
 }

@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { Page } from 'tns-core-modules/ui/page';
 import { setString, getString } from 'tns-core-modules/application-settings/application-settings';
 
-import { UserService } from '../../user/user.service';
+import { UserService } from '../../models/user/user.service';
 
 @Component({
     selector: 'ns-confirm',

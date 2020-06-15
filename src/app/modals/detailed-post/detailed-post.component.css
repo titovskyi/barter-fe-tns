@@ -1,1 +1,15 @@
 /* Add mobile styles for the component here.  */
+.profile__action {
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18;
+    padding: 10;
+}
+
+.profile__action-icon {
+    padding: 10;
+}
+
+.detailed-input {
+    font-size: 16;
+}

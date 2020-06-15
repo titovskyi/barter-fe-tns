@@ -1,18 +1,53 @@
-<!--<ScrollView *ngIf="stripPosts" class="strip-wrapper" height="100%">-->
-    <StackLayout class="strip-wrapper__item" *ngIf="stripPosts">
-        <WrapLayout *ngFor="let post of stripPosts">
-            <FlexboxLayout alignItems="center">
-                <AbsoluteLayout class="avatar__wrapper">
-                    <Label *ngIf="post.user && !post.user.avatar" class="empty-avatar__bg"></Label>
-                    <Label *ngIf="post.user && !post.user.avatar" top="10" left="15" text="&#xf007;" class="fas empty-avatar__img"></Label>
-<!--                    <Image *ngIf="post.user.avatar" class="avatar" [src]="post.user.avatar" stretch="aspectFill" margin="10"></Image>-->
-                    <FrescoDrawee *ngIf="post.user && post.user.avatar" class="avatar" aspectRatio="1" verticalAlignment="top" roundAsCircle="true" [imageUri]="post.user.avatar" stretch="aspectFill"  margin="10"></FrescoDrawee>
-                </AbsoluteLayout>
-                <Label class="strip-user-name" [text]="post.user.name"></Label>
+<StackLayout class="strip-wrapper__item" *ngIf="stripPosts">
+    <WrapLayout *ngFor="let post of stripPosts">
+        <FlexboxLayout alignItems="center">
+            <AbsoluteLayout class="avatar__wrapper">
+                <Label *ngIf="post.user && !post.user.avatar" class="empty-avatar__bg"></Label>
+                <Label
+                    *ngIf="post.user && !post.user.avatar"
+                    top="10"
+                    left="15"
+                    text="&#xf007;"
+                    class="fas empty-avatar__img"
+                ></Label>
+                <FrescoDrawee
+                    *ngIf="post.user && post.user.avatar"
+                    class="avatar"
+                    aspectRatio="1"
+                    verticalAlignment="top"
+                    roundAsCircle="true"
+                    [imageUri]="post.user.avatar"
+                    stretch="aspectFill"
+                    margin="10"
+                ></FrescoDrawee>
+            </AbsoluteLayout>
+            <Label class="strip-user-name" [text]="post.user.name"></Label>
+        </FlexboxLayout>
+        <GridLayout rows="*" columns="*">
+            <FlexboxLayout
+                row="0"
+                class="strip-photo__action-bg"
+                [visibility]="currentPostId === post.id ? 'visible' : 'collapse'"
+                (tap)="onPostUnMark()"
+            >
+                <Label text="&#xf004;" class="strip-photo__action-icon" [ngClass]="checkLiked(post) ? 'fas' : 'far'" (tap)="onLikeTap(post)"></Label>
+                <Label text="&#xf217;" class="fas strip-photo__action-icon" (tap)="onProposeTap(post.id)"></Label>
             </FlexboxLayout>
-<!--            <Image class="strip-photo" [src]="post.photo"></Image>-->
-            <FrescoDrawee class="strip-photo" aspectRatio="0.8" verticalAlignment="top" [imageUri]="post.photo"></FrescoDrawee>
-            <Label class="strip-post-name" [text]="post.title"></Label>
-        </WrapLayout>
-    </StackLayout>
-<!--</ScrollView>-->
+
+            <FrescoDrawee
+                row="0"
+                class="strip-photo"
+                verticalAlignment="top"
+                [imageUri]="post.photo"
+                failureImageUri="~/app/assets/fail-image.jpg"
+                (tap)="onPostMark(post.id)"
+            ></FrescoDrawee>
+        </GridLayout>
+        <FlexboxLayout class="strip-post__info">
+            <Label text="&#xf004;" [ngClass]="checkLiked(post) ? 'fas' : 'far'" [style.color]="setLikeColor(post)"></Label>
+            <Label [text]="post.likes.length" class="strip-post__info_count"></Label>
+        </FlexboxLayout>
+        <Label class="strip-post-title" [text]="post.title"></Label>
+        <Label class="strip-post-description" [text]="post.description"></Label>
+    </WrapLayout>
+</StackLayout>
